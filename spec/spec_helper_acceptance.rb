@@ -3,6 +3,7 @@ require 'beaker-rspec/helpers/serverspec'
 require 'beaker/puppet_install_helper'
 
 run_puppet_install_helper unless ENV['BEAKER_provision'] == 'no'
+
 RSpec.configure do |c|
   # Project root
   proj_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
@@ -17,7 +18,7 @@ RSpec.configure do |c|
     hosts.each do |host|
       on(host ,'mkdir -p /tmp/modules')
       scp_to host, "#{proj_root}/spec/fixtures/modules", "/tmp", {:ignore => ["profile_influxdb"]}
-      on(host,'mv /tmp/modules/* /etc/puppet/modules')
+      on(host,'mv /tmp/modules/* /etc/puppetlabs/code/modules/')
     end
   end
 end

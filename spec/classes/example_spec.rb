@@ -18,7 +18,7 @@ describe 'profile_influxdb' do
           it { is_expected.to contain_class('profile_influxdb::install') }
           it { is_expected.to contain_class('profile_influxdb::config') }
           it { is_expected.to contain_class('profile_influxdb::service') }
-          it { is_expected.to contain_class('influxdb::server') }
+          it { is_expected.to contain_class('influxdb') }
   
 
         end

@@ -18,8 +18,8 @@ describe 'profile_influxdb class' do
         EOS
 
         # Run it twice and test for idempotency
-        apply_manifest(pp, :catch_failures => true, :future_parser => true)
-#        apply_manifest(pp, :catch_changes  => true, :future_parser => true)
+        apply_manifest(pp, :catch_failures => true)
+#        apply_manifest(pp, :catch_changes  => true)
         # wait because influxdb takes few seconds to start
         shell("/bin/sleep 10")
       end

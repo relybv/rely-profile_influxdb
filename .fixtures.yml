@@ -6,9 +6,11 @@ fixtures:
     apt : "https://github.com/puppetlabs/puppetlabs-apt.git"
 
 # profile module layout, default include ntp module
-    ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
     rspec_monitor: "git://github.com/pgomersbach/test-rspec_monitor.git"
+    archive: "https://github.com/voxpupuli/puppet-archive.git"
+    wget: "https://github.com/maestrodev/puppet-wget.git"
     influxdb: "https://github.com/n1tr0g/golja-influxdb.git"
+    grafana: "https://github.com/voxpupuli/puppet-grafana.git"
 
   symlinks:
     profile_influxdb: "#{source_dir}"

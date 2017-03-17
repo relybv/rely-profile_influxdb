@@ -9,9 +9,9 @@ class profile_influxdb::service {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  service { 'grafana':
-    ensure => running,
-    enable => true,
-  }
+#  service { 'grafana':
+#    ensure => running,
+#    enable => true,
+#  }
 
 }
