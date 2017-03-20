@@ -5,7 +5,7 @@ node {
          // Clean workspace before checkout
          step ([$class: 'WsCleanup'])
          // Get some code from a GitHub repository
-         git 'https://github.com/relybv/rely-profile_telegraf.git'
+         git 'https://github.com/relybv/rely-profile_influxdb.git'
       }
       stage('Dependencies') {
          sh 'cd $WORKSPACE'
