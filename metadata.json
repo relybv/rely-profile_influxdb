@@ -1,11 +1,11 @@
 {
-  "name": "dirict-profile_influxdb",
+  "name": "rely-profile_influxdb",
   "version": "0.1.0",
   "author": "P. Gomersbach",
   "summary": "Install and configure influxdb",
   "license": "Apache-2.0",
-  "source": "https://github.com/relybv/dirict-profile_influxdb.git",
-  "project_page": "https://github.com/relybv/dirict-profile_influxdb",
+  "source": "https://github.com/relybv/rely-profile_influxdb.git",
+  "project_page": "https://github.com/relybv/rely-profile_influxdb",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",

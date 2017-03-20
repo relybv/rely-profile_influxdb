@@ -4,7 +4,7 @@
 # Usage:
 # <powershell>
 # Set-ExecutionPolicy Unrestricted -Force
-# icm $executioncontext.InvokeCommand.NewScriptBlock((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/relybv/dirict-profile_influxdb/master/files/bootme.ps1')) -ArgumentList ("profile_influxdb")
+# icm $executioncontext.InvokeCommand.NewScriptBlock((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/relybv/rely-profile_influxdb/master/files/bootme.ps1')) -ArgumentList ("profile_influxdb")
 #</powershell>
 
 
@@ -12,7 +12,7 @@
     [string]$role = "profile_influxdb"
   )
 
-  $puppet_source = "https://github.com/relybv/dirict-profile_influxdb.git"
+  $puppet_source = "https://github.com/relybv/rely-profile_influxdb.git"
 
   # check admin rights
   $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
