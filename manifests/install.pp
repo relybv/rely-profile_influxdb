@@ -7,7 +7,12 @@ class profile_influxdb::install {
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
-#  $_operatingsystem = downcase($::operatingsystem)
+
+  class {'influxdb':
+    global_config  => $::global_config,
+    manage_repos   => true,
+    manage_service => true,
+  }
 
   class { 'grafana':
     cfg => {
@@ -28,10 +33,13 @@ class profile_influxdb::install {
     },
   }
 
-  class {'influxdb':
-    global_config  => $::global_config,
-    manage_repos   => true,
-    manage_service => true,
+  grafana_datasource { 'telegraf':
+    grafana_url       => 'http://localhost:8080',
+    type              => 'influxdb',
+    url               => 'http://localhost:8086',
+    database          => 'telegraf',
+    access_mode       => 'proxy',
+    is_default        => true,
   }
 
 }
