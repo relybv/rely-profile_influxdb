@@ -46,7 +46,7 @@ class profile_influxdb::install {
     is_default       => true,
     require          => Class['influxdb'],
   }
-  grafana_datasource { 'DS_INTERNAL_INFLUXDB':
+  grafana_datasource { 'internal_influxdb':
     grafana_url      => 'http://localhost:8080',
     grafana_user     => 'admin',
     grafana_password => 'admin',
