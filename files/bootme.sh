@@ -5,12 +5,11 @@
 # Usage:
 # Ubuntu / Debian: wget https://raw.githubusercontent.com/relybv/rely-profile_influxdb/master/files/bootme.sh; bash bootme.sh
 #
-# Red Hat / CentOS: curl https://raw.githubusercontent.com/relybv/rely-profile_influxdb/master/files/bootme.sh -o bootme.sh; bash bootme.sh
 # Options: add 3 as parameter to install 4.x release
 
 # default major version, comment to install puppet 3.x
 PUPPETMAJORVERSION=4
-export DEBIAN_FRONTEND=noninteractive
+
 ### Code start ###
 if [ "$(id -u)" != "0" ]; then
   echo "This script must be run as root." >&2
@@ -40,7 +39,7 @@ if which apt-get > /dev/null 2>&1; then
     echo "Using yum"
 fi
 
-apt-get install git bundler zlib1g-dev libaugeas-ruby -y -q || yum install -y git bundler zlib-devel
+apt-get install git bundler zlib1g-dev -y || yum install -y git bundler zlib-devel
 
 # get or update repo
 if [ -d /root/profile_influxdb ]; then
@@ -53,19 +52,20 @@ else
   cd /root/profile_influxdb
 fi
 
-# install puppet
-bash /root/profile_influxdb/files/bootstrap.sh $PUPPETMAJOR
+# install puppet if not installed
+if which puppet > /dev/null 2>&1; then
+    echo "Puppet is already installed."
+  else
+    bash /root/profile_influxdb/files/bootstrap.sh $PUPPETMAJOR
+fi
 
 # prepare bundle
 echo "Installing gems"
-/opt/puppetlabs/puppet/bin/gem install puppetlabs_spec_helper --no-rdoc --no-ri -q
-
+bundle install --path vendor/bundle --without development system_tests
 # install dependencies from .fixtures
 echo "Preparing modules"
-/opt/puppetlabs/puppet/bin/rake spec_prep
-
+bundle exec rake spec_prep
 # copy to puppet module location
 cp -a /root/profile_influxdb/spec/fixtures/modules/* $MODULEDIR
-
 echo "Run puppet apply"
 /usr/local/bin/puppet apply -e "include profile_influxdb"
