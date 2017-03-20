@@ -41,6 +41,7 @@ class profile_influxdb::install {
     database         => 'telegraf',
     access_mode      => 'proxy',
     is_default       => true,
+    require          => Class['influxdb'],
   }
 
   grafana_dashboard { 'telegraf_dashboard':
@@ -48,5 +49,6 @@ class profile_influxdb::install {
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/telegraf-dash.json.erb'),
+    require          => Class['influxdb'],
   }
 }
