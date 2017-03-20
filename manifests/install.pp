@@ -55,7 +55,6 @@ class profile_influxdb::install {
     user             => 'admin',
     password         => 'admin',
     access_mode      => 'proxy',
-    is_default       => true,
     require          => Class['influxdb'],
   }
   grafana_dashboard { 'telegraf_dashboard':
