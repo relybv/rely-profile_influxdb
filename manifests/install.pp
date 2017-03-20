@@ -34,12 +34,12 @@ class profile_influxdb::install {
   }
 
   grafana_datasource { 'telegraf':
-    grafana_url       => 'http://localhost:8080',
-    type              => 'influxdb',
-    url               => 'http://localhost:8086',
-    database          => 'telegraf',
-    access_mode       => 'proxy',
-    is_default        => true,
+    grafana_url => 'http://localhost:8080',
+    type        => 'influxdb',
+    url         => 'http://localhost:8086',
+    database    => 'telegraf',
+    access_mode => 'proxy',
+    is_default  => true,
   }
 
 }
