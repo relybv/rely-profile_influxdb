@@ -48,6 +48,6 @@ class profile_influxdb::install {
     grafana_url       => 'http://localhost:8080',
     grafana_user      => 'admin',
     grafana_password  => 'admin',
-    content           => template('profile_influxdb/telegraf-dash.json'),
+    content           => template('profile_influxdb/telegraf-dash.json.erb'),
   }
 }
