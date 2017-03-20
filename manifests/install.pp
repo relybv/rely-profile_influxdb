@@ -44,4 +44,10 @@ class profile_influxdb::install {
     is_default       => true,
   }
 
+  grafana_dashboard { 'telegraf_dashboard':
+    grafana_url       => 'http://localhost:8080',
+    grafana_user      => 'admin',
+    grafana_password  => 'admin',
+    content           => template('telegraf-dash.json'),
+  }
 }
