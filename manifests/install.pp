@@ -9,7 +9,6 @@ class profile_influxdb::install {
   }
 
   class {'influxdb':
-    global_config  => $::global_config,
     manage_repos   => true,
     manage_service => true,
   }
