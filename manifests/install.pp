@@ -39,6 +39,8 @@ class profile_influxdb::install {
     type             => 'influxdb',
     url              => 'http://localhost:8086',
     database         => 'telegraf',
+    user             => 'admin',
+    password         => 'admin',
     access_mode      => 'proxy',
     is_default       => true,
     require          => Class['influxdb'],
