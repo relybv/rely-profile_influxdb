@@ -14,8 +14,9 @@ class profile_influxdb::install {
   }
 
   class { 'grafana':
-    install_method => 'repo',
-    cfg            => {
+    install_method      => 'repo',
+    manage_package_repo => true,
+    cfg                 => {
       app_mode => 'production',
       server   => {
         http_port     => 8080,
