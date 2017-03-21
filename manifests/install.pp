@@ -11,7 +11,7 @@ class profile_influxdb::install {
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
-    version        => '1.2.1',
+    version        => '1.2.1-1',
   }
 
   class { 'grafana':
@@ -35,7 +35,7 @@ class profile_influxdb::install {
     },
   }
 
-  grafana_datasource { 'influxdb':
+  grafana_datasource { 'telegraf':
     grafana_url      => 'http://localhost:8080',
     grafana_user     => 'admin',
     grafana_password => 'admin',
@@ -56,12 +56,12 @@ class profile_influxdb::install {
     access_mode      => 'proxy',
     require          => Class['influxdb'],
   }
-  grafana_dashboard { 'telegraf_dashboard':
+  grafana_dashboard { 'Telegraf metrics':
     grafana_url      => 'http://localhost:8080',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/telegraf-dash.json.erb'),
-    require          => [ Class['influxdb'], Grafana_datasource['influxdb'],],
+    require          => [ Class['influxdb'], Grafana_datasource['telegraf'],],
   }
   grafana_dashboard { 'InfluxDB Metrics':
     grafana_url      => 'http://localhost:8080',
