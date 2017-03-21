@@ -56,7 +56,7 @@ class profile_influxdb::install {
     access_mode      => 'proxy',
     require          => Class['influxdb'],
   }
-  grafana_dashboard { 'Telegraf metrics':
+  grafana_dashboard { 'Telegraf system overview':
     grafana_url      => 'http://localhost:8080',
     grafana_user     => 'admin',
     grafana_password => 'admin',
