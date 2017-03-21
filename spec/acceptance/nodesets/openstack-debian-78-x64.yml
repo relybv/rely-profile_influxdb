@@ -3,12 +3,13 @@ HOSTS:
     roles:
       - master
     platform: debian-7-amd64
-    flavor: ha_localdisk.1c.1r.10h
+    flavor: ha_localdisk.4c.16r.60h
     hypervisor: openstack
     image: "debian-7-amd64"
     user: debian
 
 CONFIG:
-  log_level: verbose
+  log_level: info
   type: foss
-  openstack_network: zooi.network
+  openstack_network: internal
+  color: false
