@@ -11,7 +11,7 @@ class profile_influxdb::install {
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
-    version        => '1.2.2',
+    version        => '1.2.1',
   }
 
   class { 'grafana':
@@ -42,8 +42,6 @@ class profile_influxdb::install {
     type             => 'influxdb',
     url              => 'http://localhost:8086',
     database         => 'telegraf',
-    user             => 'admin',
-    password         => 'admin',
     access_mode      => 'proxy',
     is_default       => true,
     require          => Class['influxdb'],
@@ -55,8 +53,6 @@ class profile_influxdb::install {
     type             => 'influxdb',
     url              => 'http://localhost:8086',
     database         => '_internal',
-    user             => 'admin',
-    password         => 'admin',
     access_mode      => 'proxy',
     require          => Class['influxdb'],
   }
