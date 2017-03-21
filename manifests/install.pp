@@ -14,7 +14,8 @@ class profile_influxdb::install {
   }
 
   class { 'grafana':
-    install_method => 'archive',
+    install_method => 'package',
+    package_source => 'https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.1.2-1486989747_amd64.deb',
     cfg            => {
       app_mode => 'production',
       server   => {
