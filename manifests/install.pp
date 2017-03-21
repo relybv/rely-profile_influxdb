@@ -34,7 +34,7 @@ class profile_influxdb::install {
     },
   }
 
-  grafana_datasource { 'telegraf':
+  grafana_datasource { 'influxdb':
     grafana_url      => 'http://localhost:8080',
     grafana_user     => 'admin',
     grafana_password => 'admin',
@@ -64,14 +64,14 @@ class profile_influxdb::install {
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/telegraf-dash.json.erb'),
-    require          => Class['influxdb'],
+    require          => [ Class['influxdb'], Grafana_datasource['influxdb'],],
   }
   grafana_dashboard { 'influxdb_dashboard':
     grafana_url      => 'http://localhost:8080',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/influxdb-dash.json.erb'),
-    require          => Class['influxdb'],
+    require          => [ Class['influxdb'], Grafana_datasource['internal_influxdb'],],
   }
 
 }
