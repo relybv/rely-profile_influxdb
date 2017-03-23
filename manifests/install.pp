@@ -33,7 +33,6 @@ class profile_influxdb::install {
         allow_sign_up => false,
       },
     },
-    require        => Class['influxdb'],
   }
 
   grafana_datasource { 'influxdb':
