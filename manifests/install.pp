@@ -11,7 +11,7 @@ class profile_influxdb::install {
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
-#    version        => '1.2.1-1',
+    version        => '1.2.1-1',
   }
 
   class { 'grafana':
@@ -33,6 +33,7 @@ class profile_influxdb::install {
         allow_sign_up => false,
       },
     },
+    require        => Class['influxdb'],
   }
 
   grafana_datasource { 'influxdb':
