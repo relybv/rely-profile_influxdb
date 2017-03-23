@@ -9,7 +9,7 @@ HOSTS:
     user: ubuntu
 
 CONFIG:
-  log_level: debug
+  log_level: info
   type: foss
   openstack_network: internal
   color: false
