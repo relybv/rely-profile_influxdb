@@ -11,6 +11,8 @@ fixtures:
     wget: "https://github.com/maestrodev/puppet-wget.git"
     influxdb: "https://github.com/n1tr0g/golja-influxdb.git"
     grafana: "https://github.com/voxpupuli/puppet-grafana.git"
+    yum: "https://github.com/CERIT-SC/puppet-yum.git"
+    
 
   symlinks:
     profile_influxdb: "#{source_dir}"
