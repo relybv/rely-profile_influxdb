@@ -9,8 +9,8 @@
 #
 class profile_influxdb
 {
-  class { '::profile_influxdb::install': } ->
-  class { '::profile_influxdb::config': } ~>
-  class { '::profile_influxdb::service': } ->
-  Class['::profile_influxdb']
+  class { '::profile_influxdb::install': }
+  -> class { '::profile_influxdb::config': }
+  ~> class { '::profile_influxdb::service': }
+  -> Class['::profile_influxdb']
 }
