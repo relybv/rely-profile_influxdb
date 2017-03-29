@@ -77,5 +77,12 @@ class profile_influxdb::install {
     content          => template('profile_influxdb/apache-dash.json.erb'),
     require          => [ Class['influxdb'], Grafana_datasource['internal_influxdb'],],
   }
+  grafana_dashboard { 'MySQL Metrics':
+    grafana_url      => 'http://localhost:8080',
+    grafana_user     => 'admin',
+    grafana_password => 'admin',
+    content          => template('profile_influxdb/mysql-dash.json.erb'),
+    require          => [ Class['influxdb'], Grafana_datasource['internal_influxdb'],],
+  }
 
 }
