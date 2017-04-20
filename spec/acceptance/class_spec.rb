@@ -34,5 +34,22 @@ describe 'profile_influxdb class' do
       it { is_expected.to be_running }
     end
 
+    describe port(8088) do
+      it { should be_listening }
+    end
+
+    describe package('grafana') do
+      it { is_expected.to be_installed }
+    end
+
+    describe service('grafana-server') do
+      it { is_expected.to be_enabled }
+      it { is_expected.to be_running }
+    end
+
+    describe port(8080) do
+      it { should be_listening }
+    end
+
   end
 end
