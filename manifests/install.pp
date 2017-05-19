@@ -20,7 +20,7 @@ class profile_influxdb::install {
     cfg            => {
       app_mode => 'production',
       server   => {
-        http_port     => 8080,
+        http_port     => 3000,
       },
       database => {
         type     => 'sqlite3',
@@ -36,7 +36,7 @@ class profile_influxdb::install {
   }
 
   grafana_datasource { 'influxdb':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     type             => 'influxdb',
@@ -47,7 +47,7 @@ class profile_influxdb::install {
     require          => Class['influxdb'],
   }
   grafana_datasource { 'internal_influxdb':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     type             => 'influxdb',
@@ -58,42 +58,42 @@ class profile_influxdb::install {
   }
 
   grafana_dashboard { 'Telegraf Windows Instances':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/windows-dash.json.erb'),
     require          => [ Class['influxdb'], Grafana_datasource['influxdb'],],
   }
   grafana_dashboard { 'HAproxy metrics':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/haproxy-dash.json.erb'),
     require          => [ Class['influxdb'], Grafana_datasource['influxdb'],],
   }
   grafana_dashboard { 'Telegraf system overview':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/telegraf-dash.json.erb'),
     require          => [ Class['influxdb'], Grafana_datasource['influxdb'],],
   }
   grafana_dashboard { 'InfluxDB Metrics':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/influxdb-dash.json.erb'),
     require          => [ Class['influxdb'], Grafana_datasource['internal_influxdb'],],
   }
   grafana_dashboard { 'Apache Overview':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/apache-dash.json.erb'),
     require          => [ Class['influxdb'], Grafana_datasource['internal_influxdb'],],
   }
   grafana_dashboard { 'MySQL Metrics':
-    grafana_url      => 'http://localhost:8080',
+    grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
     grafana_password => 'admin',
     content          => template('profile_influxdb/mysql-dash.json.erb'),
