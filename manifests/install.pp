@@ -35,6 +35,12 @@ class profile_influxdb::install {
     },
   }
 
+
+  exec {'wait for grafana':
+    require => Class['grafana'],
+    command => '/usr/bin/wget --spider --tries 10 --retry-connrefused http://localhost:3000',
+  }
+
   grafana_datasource { 'influxdb':
     grafana_url      => 'http://localhost:3000',
     grafana_user     => 'admin',
@@ -44,7 +50,7 @@ class profile_influxdb::install {
     database         => 'telegraf',
     access_mode      => 'proxy',
     is_default       => true,
-    require          => Class['influxdb'],
+    require          => [Class['influxdb'], Exec['wait for grafana']],
   }
   grafana_datasource { 'internal_influxdb':
     grafana_url      => 'http://localhost:3000',
@@ -54,7 +60,7 @@ class profile_influxdb::install {
     url              => 'http://localhost:8086',
     database         => '_internal',
     access_mode      => 'proxy',
-    require          => Class['influxdb'],
+    require          => [Class['influxdb'], Exec['wait for grafana']],
   }
 
   grafana_dashboard { 'Telegraf Windows Instances':
