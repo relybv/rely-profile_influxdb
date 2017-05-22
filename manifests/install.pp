@@ -11,12 +11,12 @@ class profile_influxdb::install {
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
-#    version        => '1.2.2',
+    version        => '1.2.4',
   }
 
   class { 'grafana':
     install_method => 'package',
-    package_source => 'https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.1.2-1486989747_amd64.deb',
+    package_source => 'https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.2.0_amd64.deb',
     cfg            => {
       app_mode => 'production',
       server   => {
