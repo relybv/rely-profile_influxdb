@@ -11,7 +11,6 @@ class profile_influxdb::install {
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
-    version        => '1.2.4',
   }
 
   class { 'grafana':
