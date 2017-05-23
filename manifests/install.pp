@@ -51,7 +51,7 @@ class profile_influxdb::install {
   }
 
   class {'influxdb':
-    manage_repos   => true,
+    manage_repos   => false,
     manage_service => true,
     global_config  => $global_config,
     meta_config    => $meta_config,
