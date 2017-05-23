@@ -8,7 +8,7 @@ class profile_influxdb::install {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  Class['apt::update'] -> Package['influxdb-client']
+  Class['influxdb'] -> Package['influxdb-client']
   Class['apt::update'] -> Package['influxdb']
   Class['apt::update'] -> Package['grafana']
 
