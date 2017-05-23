@@ -32,12 +32,31 @@ class profile_influxdb::install {
     'max-values-per-tag'                 => 100000,
   }
 
+  $http_config = {
+    'enabled'              => true,
+    'bind-address'         => ':8086',
+    'auth-enabled'         => false,
+    'realm'                => 'InfluxDB',
+    'log-enabled'          => false,
+    'write-tracing'        => false,
+    'pprof-enabled'        => true,
+    'https-enabled'        => false,
+    'https-certificate'    => '/etc/ssl/influxdb.pem',
+    'https-private-key'    => '',
+    'shared-sercret'       => '',
+    'max-row-limit'        => 10000,
+    'max-connection-limit' => 0,
+    'unix-socket-enabled'  => false,
+    'bind-socket'          => '/var/run/influxdb.sock',
+  }
+
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
     global_config  => $global_config,
     meta_config    => $meta_config,
     data_config    => $data_config,
+    http_config    => $http_config,
   }
 
   class { 'grafana':
