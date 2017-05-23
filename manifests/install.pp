@@ -8,9 +8,36 @@ class profile_influxdb::install {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
+  $global_config = {
+    'bind-address'       => ':8088',
+    'reporting-disabled' => false,
+  }
+
+  $meta_config = {
+    'dir'                  => '/var/lib/influxdb/meta',
+    'retention-autocreate' => true,
+    'logging-enabled'      => false,
+  }
+
+  $data_config = {
+    'dir'                                => '/var/lib/influxdb/data',
+    'wal-dir'                            => '/var/lib/influxdb/wal',
+    'trace-logging-enabled'              => false,
+    'query-log-enabled'                  => false,
+    'cache-max-memory-size'              => 1048576000,
+    'cache-snapshot-memory-size'         => 26214400,
+    'cache-snapshot-write-cold-duration' => '10m',
+    'compact-full-write-cold-duration'   => '4h',
+    'max-series-per-database'            => 1000000,
+    'max-values-per-tag'                 => 100000,
+  }
+
   class {'influxdb':
     manage_repos   => true,
     manage_service => true,
+    global_config  => $global_config,
+    meta_config    => $meta_config,
+    data_config    => $data_config,
   }
 
   class { 'grafana':
