@@ -8,15 +8,12 @@ class profile_influxdb::install {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  Class['influxdb'] -> Package['influxdb-client']
   Class['apt::update'] -> Package['influxdb']
   Class['apt::update'] -> Package['grafana']
 
   $_operatingsystem = downcase($::operatingsystem)
 
   ensure_resource('apt::source', 'influxrepo', {'ensure' => 'present', 'location' => "https://repos.influxdata.com/${_operatingsystem}", 'release' => $::lsbdistcodename, 'repos' => 'stable', 'key' => { 'id' => '05CE15085FC09D18E99EFB22684A14CF2582E0C5', 'source' => 'https://repos.influxdata.com/influxdb.key',} })
-
-  ensure_resource('package', 'influxdb-client',{'ensure' => 'present', } )
 
   $global_config = {
     'bind-address'       => ':8088',
