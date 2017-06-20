@@ -21,6 +21,21 @@ describe 'profile_influxdb' do
           it { is_expected.to contain_class('influxdb') }
           it { is_expected.to contain_class('grafana') }
 
+          it { is_expected.to contain_apt__source('influxrepo') }
+
+          it { is_expected.to contain_exec('create_telegrafdb') }
+          it { is_expected.to contain_exec('wait for grafana') }
+
+          it { is_expected.to contain_grafana_datasource('influxdb') }
+          it { is_expected.to contain_grafana_datasource('internal_influxdb') }
+
+          it { is_expected.to contain_grafana_dashboard('Apache Overview') }
+          it { is_expected.to contain_grafana_dashboard('HAproxy metrics') }
+          it { is_expected.to contain_grafana_dashboard('InfluxDB Metrics') }
+          it { is_expected.to contain_grafana_dashboard('MySQL Metrics') }
+          it { is_expected.to contain_grafana_dashboard('Telegraf Windows Instances') }
+          it { is_expected.to contain_grafana_dashboard('Telegraf system overview') }
+
         end
       end
     end
