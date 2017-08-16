@@ -77,7 +77,7 @@ class profile_influxdb::install {
 
   class { 'grafana':
     install_method => 'package',
-    package_source => 'https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.2.0_amd64.deb',
+    package_source => 'https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.4.3_amd64.deb',
     cfg            => {
       app_mode => 'production',
       server   => {
